@@ -7,13 +7,20 @@ package DAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.Supplier;
-import utilities.DBConnection;
+import Model.Supplier;
+import Utilities.DBConnection;
 
 /**
  *
- * @author kimbe
+ * @author Kimberly Chong
  */
 public class SupplierDAO {
-    
+    //var
+    private Connection conn;
+
+    //constructor
+    public SupplierDAO()
+    {
+        conn = DBConnection.getConnection();
+    }
 }
