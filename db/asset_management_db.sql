@@ -11,12 +11,12 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- EMPLOYEES TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `Employee`;
-CREATE TABLE `Employee`(
+CREATE TABLE IF NOT EXISTS `Employee`(
 	`employeeID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `firstName` VARCHAR(50) NOT NULL,
     `lastName` VARCHAR(50) NOT NULL,
-    `department` VARCHAR(100) NOT NULL,
-    `position` VARCHAR(100) NOT NULL,
+    `department` VARCHAR(50) NOT NULL,
+    `position` VARCHAR(50) NOT NULL,
     `contactNumber` VARCHAR(20) NOT NULL,
     `email` VARCHAR(100) NOT NULL,
     PRIMARY KEY (`employeeID`)
@@ -26,12 +26,12 @@ CREATE TABLE `Employee`(
 -- ASSET TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `Asset`;
-CREATE TABLE `Asset`(
+CREATE TABLE IF NOT EXISTS `Asset`(
 	`assetID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `expiryDate` DATE NOT NULL,
     `purchaseDate` DATE NOT NULL,
     `a_status` ENUM('active', 'inactive', 'expired', 'damaged', 'lost', 'returned') NOT NULL,
-    `assetType` ENUM('hardware', 'software') NOT NULL,
+    `assetType` ENUM('H', 'S') NOT NULL,
     PRIMARY KEY (`assetID`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -39,9 +39,9 @@ CREATE TABLE `Asset`(
 -- HARDWARE ASSET TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `HardwareAsset`;
-CREATE TABLE `HardwareAsset`(
+CREATE TABLE IF NOT EXISTS `HardwareAsset`(
 	`H_assetID` INT UNSIGNED NOT NULL,
-    `h_type` VARCHAR(20) NOT NULL,
+    `type` VARCHAR(20) NOT NULL,
     `brand` VARCHAR(50) NOT NULL,
     `model` VARCHAR(50) NOT NULL,
     `serialNumber` VARCHAR(50) NOT NULL,
@@ -56,10 +56,10 @@ CREATE TABLE `HardwareAsset`(
 -- SOFTWARE LICENSE ASSET TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `SoftwareLicense`;
-CREATE TABLE `SoftwareLicense`(
+CREATE TABLE IF NOT EXISTS `SoftwareLicense`(
 	`S_assetID` INT UNSIGNED NOT NULL,
     `softwareName` VARCHAR(20) NOT NULL,
-    `version` VARCHAR(50) NOT NULL,
+    `version` VARCHAR(10) NOT NULL,
     `licenseKey` VARCHAR(50) NOT NULL,
     `numOfUsers` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`S_assetID`),
@@ -73,7 +73,7 @@ CREATE TABLE `SoftwareLicense`(
 -- INVENTORY TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `Inventory`;
-CREATE TABLE `Inventory`(
+CREATE TABLE IF NOT EXISTS `Inventory`(
 	`itemID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `itemName` VARCHAR(100) NOT NULL,
     `itemType` VARCHAR(50) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE `Inventory`(
 -- SUPPLIER TABLE
 -- ------------------------------------------------
 DROP TABLE IF EXISTS `Supplier`;
-CREATE TABLE `Supplier`(
+CREATE TABLE IF NOT EXISTS `Supplier`(
 	`supplierID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `companyName` VARCHAR(100) NOT NULL,
     `firstName` VARCHAR(50) NOT NULL,
@@ -107,17 +107,16 @@ CREATE TABLE `Supplier`(
 DROP TABLE IF EXISTS `Assigning`;
 CREATE TABLE `Assigning`(
 	`assignmentID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `assignedBy` INT UNSIGNED NOT NULL,
     `assetID` INT UNSIGNED NOT NULL,
+    `assignedBy` INT UNSIGNED NOT NULL,
     `assignmentDate` DATE,
     `as_status` ENUM('active', 'inactive') NOT NULL,
     PRIMARY KEY (`assignmentID`),
     INDEX `idx_assigned_by_employee` (`assignedBy`),
-    INDEX `idx_asset_assigned` (`assetID`),
     CONSTRAINT `idx_assigned_by_employee`
 		FOREIGN KEY (`assignedBy`) REFERENCES `Employee` (`employeeID`)
         ON DELETE RESTRICT ON UPDATE NO ACTION,
-	CONSTRAINT `idx_asset_assigned`
+    CONSTRAINT `idx_assigned_asset`
 		FOREIGN KEY (`assetID`) REFERENCES `Asset` (`assetID`)
         ON DELETE RESTRICT ON UPDATE NO ACTION
 )ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
@@ -129,7 +128,7 @@ DROP TABLE IF EXISTS `Monitoring`;
 CREATE TABLE `Monitoring`(
 	`monitoringID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `assetID` INT UNSIGNED NOT NULL,
-    `monitoringType` ENUM('software', 'hardware') NOT NULL,
+    `monitoringType` ENUM('S', 'H') NOT NULL,
     `lastCheckedDate` DATE NOT NULL,
     `expiryDate` DATE NULL,
     `notes` VARCHAR(255) NULL,
