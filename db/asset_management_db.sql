@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Asset`(
 	`assetID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `expiryDate` DATE NOT NULL,
     `purchaseDate` DATE NOT NULL,
-    `status` ENUM('active', 'inactive', 'expired', 'damaged', 'lost', 'returned') NOT NULL,
+    `a_status` ENUM('active', 'inactive', 'expired', 'damaged', 'lost', 'returned') NOT NULL,
     `assetType` ENUM('hardware', 'software') NOT NULL,
     PRIMARY KEY (`assetID`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `Inventory`(
     `unit` VARCHAR(20) NOT NULL,
     `stockQty` INT UNSIGNED NOT NULL,
     `reorderLevel` INT UNSIGNED NOT NULL,
-    `status` ENUM('active', 'inactive') NOT NULL,
+    `i_status` ENUM('active', 'inactive') NOT NULL,
     PRIMARY KEY (`itemID`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -110,7 +110,7 @@ CREATE TABLE `Assigning`(
 	`assignmentID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `assignedBy` INT UNSIGNED NOT NULL,
     `assignmentDate` DATE,
-    `status` ENUM('active', 'inactive') NOT NULL,
+    `as_status` ENUM('active', 'inactive') NOT NULL,
     PRIMARY KEY (`assignmentID`),
     INDEX `idx_assigned_by_employee` (`assignedBy`),
     CONSTRAINT `idx_assigned_by_employee`
