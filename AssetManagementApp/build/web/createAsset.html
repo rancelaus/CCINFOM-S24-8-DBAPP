@@ -63,7 +63,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         /* 6. Hover Effect */
         .menu a:hover {
             background-color: #e6f0ff; 
-            color: #1a73e8; 
+            color: #1a73e8;
+
         }
     </style>
 </head>
@@ -71,13 +72,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="container">
         <h1>Create Asset Record</h1>
         <nav class="menu">
-            <a> Ayusin mo to hoy</a>
-            <form action="create_asset.jsp">
-                Test:<input type="text" id="assetType">
+            <form action="create_asset.jsp" method="post">
+                Expiry Date:<input type="date" id="expiryDate" name="expiryDate" required><br>
+                Purchase Date:<input type="date" id="purchaseDate" name="purchaseDate" required><br>
+                Asset Type(h/s):<input type="text" id="assetType" name="assetType" maxlength="1" pattern="[hs]" required><br>
                 <input type="Submit" value="Submit">
+            </form>
                 <a href="asset.html">🔙 Back</a>
                 <a href="index.html">🏠 Main Menu</a>
-            </form>
         </nav>
     </div>
 </body>

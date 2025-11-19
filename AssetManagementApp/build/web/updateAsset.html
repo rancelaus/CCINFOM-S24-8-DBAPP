@@ -69,16 +69,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 </head>
 <body>
     <div class="container">
-        <h1>Update Asset Record</h1>
-        <nav class="menu">
-            <a> Ayusin mo to hoy</a>
-            <form action="update_asset.jsp">
-                Test:<input type="text" id="assetType">
-                <input type="Submit" value="Submit">
-                <a href="asset.html">🔙 Back</a>
-                <a href="index.html">🏠 Main Menu</a>
-            </form>
-        </nav>
+    <h2>Update an Asset</h2>
+
+    <form action="update_asset.jsp" method="get">
+        <label>Asset ID:</label><br>
+        <input type="number" name="assetID" required>
+        <input type="submit" value="Load Record">
+    </form>
+
+    <a href="index.html">🏠 Main Menu</a>
     </div>
 </body>
 </html>

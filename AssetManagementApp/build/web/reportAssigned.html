@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
 <head>
-    <title>Create a New Record</title>
+    <title>Report on Assigned Assets</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -71,13 +71,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="container">
         <h1>Generate Assigned Asset Report</h1>
         <nav class="menu">
-            <a> Ayusin mo to hoy</a>
-            <form action="report_assigned.jsp">
-                Test:<input type="text" id="assetType">
-                <input type="Submit" value="Submit">
-                <a href="reports.html">🔙 Back</a>
-                <a href="index.html">🏠 Main Menu</a>
+            <a>Enter an asset type / brand / model to filter (optional). Leave empty to list all assigned assets.</a>
+            <form action="ReportAssignedServlet" method="get">
+                <label>Filter (asset type / brand / model)</label><br>
+                <input type="text" name="q" placeholder="e.g. laptop, monitor, Dell"><br><br>
+
+                <input type="submit" value="Generate Report">
             </form>
+            <a href="reports.html">🔙 Back</a>
+            <a href="index.html">🏠 Main Menu</a>
         </nav>
     </div>
 </body>

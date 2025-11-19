@@ -5,7 +5,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
 <head>
-    <title>Create an Assigned Transaction</title>
+    <title>Create a New Record</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -69,30 +69,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 </head>
 <body>
     <div class="container">
-        <h1>Create Assigned Transaction</h1>
+        <h1>Read Supplier Record</h1>
         <nav class="menu">
-            <a> Fill in the assignment details below.</a>
-            <form action="CreateAssignServlet" method="post">
-                <label>Employee ID</label><br>
-                <input type="number" name="employeeID" required><br>
-
-                <label>Asset ID</label><br>
-                <input type="number" name="assetID" required><br>
-
-                <label>Assignment Date</label><br>
-                <input type="date" name="assignmentDate" required><br>
-
-                <label>Status</label><br>
-                <select name="status" required>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select><br>
-
-                <input type="submit" value="Create Assignment">
+            <a> Ayusin mo to hoy</a>
+            <form action="read_supplier.jsp">
+                Test:<input type="text" id="assetType">
+                <input type="Submit" value="Submit">
+                <a href="supplier.html">🔙 Back</a>
+                <a href="index.html">🏠 Main Menu</a>
             </form>
-
-            <a href="assigning.html">🔙 Back</a>
-            <a href="index.html">🏠 Main Menu</a>
         </nav>
     </div>
 </body>

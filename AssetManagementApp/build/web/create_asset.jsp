@@ -1,15 +1,18 @@
+<%-- 
+    Document   : create_asset
+    Created on : Nov 19, 2025, 2:03:00 PM
+    Author     : Administrator
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.*, DAO.*"%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
-<head>
-    <title>Create an Assigned Transaction</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <style>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Creating Asset Record Processing</title>
+        
+        <style>
         /* 1. Global Styling & Font */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,34 +69,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             color: #1a73e8; 
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Create Assigned Transaction</h1>
-        <nav class="menu">
-            <a> Fill in the assignment details below.</a>
-            <form action="CreateAssignServlet" method="post">
-                <label>Employee ID</label><br>
-                <input type="number" name="employeeID" required><br>
-
-                <label>Asset ID</label><br>
-                <input type="number" name="assetID" required><br>
-
-                <label>Assignment Date</label><br>
-                <input type="date" name="assignmentDate" required><br>
-
-                <label>Status</label><br>
-                <select name="status" required>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                </select><br>
-
-                <input type="submit" value="Create Assignment">
-            </form>
-
-            <a href="assigning.html">🔙 Back</a>
-            <a href="index.html">🏠 Main Menu</a>
-        </nav>
-    </div>
-</body>
+    
+    </head>
+    <body>
+        <%
+            AssetDAO A = new AssetDAO();
+            String expiryDate = request.getParameter("expiryDate");
+            String purchaseDate = request.getParameter("purchaseDate");
+            String assetType = request.getParameter("assetType");
+            A.expiryDate = java.sql.Date.valueOf(expiryDate);
+            A.purchaseDate = java.sql.Date.valueOf(purchaseDate);
+            A.assetType = assetType.charAt(0);
+            
+            
+            boolean status = A.create_asset();
+            if(status){
+        %>
+                <h1>Creating Asset Successful!</h1>
+        <%  } else{
+        %>
+                <h1>Creating Asset Failed!</h1>
+        <%        }
+        %>
+    </body>
 </html>
