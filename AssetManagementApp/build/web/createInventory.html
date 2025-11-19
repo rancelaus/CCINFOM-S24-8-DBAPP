@@ -71,13 +71,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <div class="container">
         <h1>Create Inventory Record</h1>
         <nav class="menu">
-            <a> Input</a>
-            <form action="create_inventory.jsp">
-                Inventory Name: <input type="text" id="itemName" name="itemName">
+            <a> Please input in the appropriate fields</a>
+            <form action="create_inventory.jsp" method="post">
+                Item Name: <input type="text" id="itemName" name="itemName"><br>
+                Item Type: <input type="text" id="itemType" name="itemType"><br>
+                Unit: <input type="text" id="unit" name="unit"><br>
+                Stock Quantity: <input type="number" id="stockQty" name="stockQty"><br>
+                Reorder Level: <input type="number" id="reorderLevel" name="reorderLevel"><br>
                 <input type="Submit" value="Submit">
-                <a href="inventory.html">🔙 Back</a>
-                <a href="index.html">🏠 Main Menu</a>
             </form>
+            <a href="inventory.html">🔙 Back</a>
+            <a href="index.html">🏠 Main Menu</a>
         </nav>
     </div>
 </body>

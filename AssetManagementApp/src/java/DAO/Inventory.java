@@ -17,7 +17,7 @@ public class Inventory {
     public String itemType;
     public String unit;
     public int stockQty;
-    public int reoderLevel;
+    public int reorderLevel;
     public String i_status;
     
     // Array Lists
@@ -26,7 +26,7 @@ public class Inventory {
     public ArrayList<String> itemTypelist = new ArrayList<>();
     public ArrayList<String> unitlist = new ArrayList<>();
     public ArrayList<Integer> stockQtylist = new ArrayList<>();
-    public ArrayList<Integer> reoderLevellist = new ArrayList<>();
+    public ArrayList<Integer> reorderLevellist = new ArrayList<>();
     public ArrayList<String> i_statuslist = new ArrayList<>();
     
     public Inventory() {}
@@ -46,13 +46,13 @@ public class Inventory {
             }
             
             // Save the new Inventory
-            pstmt = conn.prepareStatement("INSERT INTO inventory (itemID, itemName, itemType, unit, stockQty, reorderLevel, i_status) VALUE (?, ?, ?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO inventory (itemID, itemName, itemType, unit, stockQty, reorderLevel, i_status) VALUES (?, ?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, itemID);
             pstmt.setString(2, itemName);
             pstmt.setString(3, itemType);
             pstmt.setString(4, unit);
             pstmt.setInt(5, stockQty);
-            pstmt.setInt(6, reoderLevel);
+            pstmt.setInt(6, reorderLevel);
             pstmt.setString(7, "active");
             pstmt.executeUpdate();
             
@@ -64,15 +64,5 @@ public class Inventory {
             System.out.println(e.getMessage());
             return 0;
         }
-    }
-    
-    public static void main(String[] args) {
-        var A = new Inventory();
-        A.itemName = "Beep Boop";
-        A.itemType = "Boop";
-        A.unit = "Beep";
-        A.stockQty = 1;
-        A.reoderLevel = 2;
-        A.createInventory();
     }
 }
