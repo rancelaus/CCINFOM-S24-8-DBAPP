@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Create a New Record</title>
@@ -65,27 +62,57 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             background-color: #e6f0ff; 
             color: #1a73e8; 
         }
+        
+        form {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="submit"] {
+            margin-bottom: 10px;
+            width: 590px; /* optional: controls input width */
+        }
+        
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>Create Supplier Record</h1>
-        <nav class="menu">
-            <a> Fill-Up Form </a>
+            <h2> Fill-Up Form </h2>
+            
+            <% if (request.getAttribute("message") != null) { %>
+                <p style="color: green;"><%= request.getAttribute("message") %></p>
+            <% } %>
+
+            <% if (request.getAttribute("error") != null) { %>
+                <p style="color: red;"><%= request.getAttribute("error") %></p>
+            <% } %>
+
             <form action="CreateSupplierServlet" method="post">
-                Company:            <input type="text" name="companyName" required /><br>
-                Name:                   <input type="text" name="firstName" placeholder="First Name" required />
-                                            <input type="text" name="lastName" placeholder="Last Name" required /><br>
-                Contact Number: <input type="text" name="contact" required /><br>
-                Email:                  <input type="email" name="email" required /><br>
-                Address:              <input type="text" name="zip" placeholder="ZIP Code" required />
+                Company            <input type="text" name="companyName" required />
+                Name                   <input type="text" name="firstName" placeholder="First Name" required />
+                                            <input type="text" name="lastName" placeholder="Last Name" required />
+                Contact Number <input type="text" name="contactNumber" required />
+                Email                 <input type="email" name="email" required />
+                Address              <input type="text" name="zip" placeholder="ZIP Code" required />
                                             <input type="text" name="street" placeholder="Street" required />
                                             <input type="text" name="city" placeholder="City" required />
-                                            <br><br>
+                                            <br>
                 <input type="Submit" value="Submit">
-                <a href="supplier.html">🔙 Back</a>
-                <a href="index.html">🏠 Main Menu</a>
-            </form>
+                </form>
+            
+                <% String msg = (String) request.getAttribute("message"); %>
+                <% if (msg != null) { %>
+                    <p style="color: green;"><%= msg %></p>
+                <% } %>
+                
+                 <nav class="menu">
+                    <a href="supplier.html">🔙 Back</a>
+                    <a href="index.html">🏠 Main Menu</a>
         </nav>
     </div>
 </body>
