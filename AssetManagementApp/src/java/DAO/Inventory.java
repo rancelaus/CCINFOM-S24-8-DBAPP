@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package inventorymanagement;
+package DAO;
 import java.util.*;
 import java.sql.*;
 
@@ -49,13 +49,30 @@ public class Inventory {
             pstmt = conn.prepareStatement("INSERT INTO inventory (itemID, itemName, itemType, unit, stockQty, reorderLevel, i_status) VALUE (?, ?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, itemID);
             pstmt.setString(2, itemName);
+            pstmt.setString(3, itemType);
+            pstmt.setString(4, unit);
+            pstmt.setInt(5, stockQty);
+            pstmt.setInt(6, reoderLevel);
+            pstmt.setString(7, "active");
+            pstmt.executeUpdate();
+            
+            pstmt.close();
+            conn.close();
+            
+            return 1;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return 0;
         }
-        return 0;
     }
     
     public static void main(String[] args) {
-        
+        var A = new Inventory();
+        A.itemName = "Beep Boop";
+        A.itemType = "Boop";
+        A.unit = "Beep";
+        A.stockQty = 1;
+        A.reoderLevel = 2;
+        A.createInventory();
     }
 }
